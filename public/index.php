@@ -1,4 +1,6 @@
 <?php
+require_once '../vendor/autoload.php';
 
-echo "OK";
-echo "OK";
+$db = new App\DB\Database();
+
+var_dump($db);
