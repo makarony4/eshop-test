@@ -1,6 +1,7 @@
 <?php
 require_once '../vendor/autoload.php';
+use App\Controller\ProductController;
 
-$db = new App\DB\Database();
 
-var_dump($db);
+$controller = new ProductController();
+$controller->index();

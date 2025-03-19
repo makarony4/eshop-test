@@ -25,4 +25,14 @@ class Product
         $stmt->execute();
         return $stmt;
     }
+
+    public function getProduct($product_id){
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE id = :product_id';
+        $stmt = $this->conn->prepare($query);
+        if($product_id){
+            $stmt->bindParam(':product_id', $product_id);
+        }
+        $stmt->execute();
+        return $stmt;
+    }
 }
