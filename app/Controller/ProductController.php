@@ -8,8 +8,8 @@ use App\Model\Product;
 
 class ProductController
 {
-    private $product;
-    private $category;
+    private Product $product;
+    private Category $category;
 
     public function __construct() {
         $database = new Database();
@@ -17,18 +17,22 @@ class ProductController
         $this->category = new Category($database);
     }
 
-    public function index() {
+    public function index(): void
+    {
         $categories = $this->category->read();
-        $products = $this->product->read($_GET['category_id'] ?? null, $_GET['order_by'] ?? null );
+        isset($_GET['order_by']) ? $order_by = $_GET['order_by'] : $order_by = 'price';
+        $products = $this->product->read($_GET['category_id'] ?? null, $order_by );
         include __DIR__ . '/../../views/index.php';
     }
 
-    public function getProducts($category_id = null, $order_by = 'price') {
+    public function getProducts($category_id = null, $order_by = 'price'): void
+    {
         $products = $this->product->read($category_id, $order_by);
         include __DIR__ . '/../../views/products.php';
     }
 
-    public function getProduct($product_id) {
+    public function getProduct($product_id): void
+    {
         $products = $this->product->getProduct($product_id)->fetch(\PDO::FETCH_ASSOC);
         echo json_encode($products);
     }

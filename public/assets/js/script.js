@@ -29,6 +29,9 @@ $(document).ready(function() {
             success: function(response) {
                 $("#products").empty();
                 $("#products").append(response);
+            },
+            error: function (xhr, status, error){
+                console.log("Помилка при отриманні даних" + error)
             }
         });
     }

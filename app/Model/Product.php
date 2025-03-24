@@ -12,11 +12,13 @@ class Product
         $this->conn = $db->getConnection();
     }
 
-    public function read($category_id = null, $order_by = 'price') {
+    public function read($category_id = null, $order_by = 'price')
+    {
         $query = 'SELECT * FROM ' . $this->table;
         if ($category_id) {
             $query .= ' WHERE category_id = :category_id';
         }
+
         $query .= ' ORDER BY ' . $order_by;
         $stmt = $this->conn->prepare($query);
         if ($category_id) {
